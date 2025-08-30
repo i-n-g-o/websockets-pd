@@ -1,0 +1,3 @@
+[submodule "dependencies/scaryws"]
+	path = dependencies/scaryws
+	url = https://github.com/rabbitControl/scaryws.git
