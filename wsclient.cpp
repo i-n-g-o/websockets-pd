@@ -1,8 +1,6 @@
 #include "wsclient.h"
 #include "PdWebsocketClient.h"
 
-using namespace std;
-
 
 #ifdef __cplusplus
 extern "C"{
@@ -71,7 +69,7 @@ void errorCb(t_pd *obj, void *data)
     }
 }
 
-void outData(t_outlet* outlet, const string& str)
+void outData(t_outlet* outlet, const std::string& str)
 {
     std::vector<t_atom> list(str.length());
     for (size_t i=0; i<str.length(); i++)
@@ -85,7 +83,7 @@ void outData(t_outlet* outlet, const string& str)
 
 void binaryDataCb(t_pd *obj, void *data)
 {
-    string* str = (string*)data;
+    std::string* str = (std::string*)data;
 
     if (obj != NULL)
     {
@@ -108,7 +106,7 @@ void binaryDataCb(t_pd *obj, void *data)
 
 void textDataCb(t_pd *obj, void *data)
 {
-    string* str = (string*)data;
+    std::string* str = (std::string*)data;
 
     if (obj != NULL)
     {
