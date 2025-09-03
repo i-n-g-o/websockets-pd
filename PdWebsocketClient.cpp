@@ -2,6 +2,7 @@
 
 #include <m_pd.h>
 
+
 PdWebsocketClient::PdWebsocketClient(t_pd* x)
     : WebsocketClient()
     , m_x(x)
@@ -25,14 +26,14 @@ void PdWebsocketClient::connected()
 
 void PdWebsocketClient::error(int code, const std::string& message)
 {
-    int* i = new int(code);
-    pd_queue_mess(&pd_maininstance, m_x, i, errorCb);
+    auto str = new std::string(message);
+    pd_queue_mess(&pd_maininstance, m_x, str, errorCb);
 
     WebsocketClient::error(code, message);
 }
 
 void PdWebsocketClient::disconnected(uint16_t code)
-{
+{    
     pd_queue_mess(&pd_maininstance, m_x, NULL, closedCb);
 
     WebsocketClient::disconnected(code);

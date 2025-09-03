@@ -40,14 +40,14 @@ void closedCb(t_pd *obj, void *data)
 
 void errorCb(t_pd *obj, void *data)
 {
-    int* error_code = (int*)data;
+    std::string* str = (std::string*)data;
 
     if (obj != NULL)
     {
         t_ws_client_pd *x = (t_ws_client_pd *)obj;
-        if (error_code)
+        if (str)
         {
-            post("error: %d", *error_code);
+            pd_error(x, "%s", str->c_str());
         }
     }
     else
@@ -55,9 +55,9 @@ void errorCb(t_pd *obj, void *data)
         // error got cancled
     }
 
-    if (error_code)
+    if (str)
     {
-        delete error_code;
+        delete str;
     }
 }
 
