@@ -21,6 +21,10 @@ endif()
 include(${PDCMAKE_FILE})
 
 
+# add help files
+pd_add_datafile(RabbitControl package/help/pd/wsclient-help.pd)
+pd_add_datafile(RabbitControl package/help/pd/wsserver-help.pd)
+
 #
 include_directories(dependencies/scaryws)
 add_subdirectory(dependencies/scaryws)
