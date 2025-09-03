@@ -17,7 +17,12 @@ void openedCb(t_pd *obj, void *data)
     if (obj != NULL)
     {
         t_ws_client_pd *x = (t_ws_client_pd *)obj;
-        outlet_float(x->connected_out, 1);
+
+        if (!x->connected)
+        {
+            outlet_float(x->connected_out, 1);
+            x->connected = true;
+        }
     }
     else
     {
@@ -30,7 +35,12 @@ void closedCb(t_pd *obj, void *data)
     if (obj != NULL)
     {
         t_ws_client_pd *x = (t_ws_client_pd *)obj;
-        outlet_float(x->connected_out, 0);
+
+        if (x->connected)
+        {
+            outlet_float(x->connected_out, 0);
+            x->connected = false;
+        }
     }
     else
     {
@@ -205,6 +215,8 @@ void wsclient_list(t_ws_client_pd *x, t_symbol *s, int argc, t_atom *argv)
 void *wsclient_new(t_symbol* s)
 {
     t_ws_client_pd *x = (t_ws_client_pd *)pd_new(ws_client_pd_class);
+
+    x->connected = false;
 
     x->binary_data_out = outlet_new(&x->x_obj, &s_list);
     x->string_data_out = outlet_new(&x->x_obj, &s_list);

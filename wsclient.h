@@ -14,6 +14,7 @@ typedef struct _ws_client_pd
     t_object x_obj;
 
     PdWebsocketClient* client;
+    bool connected;
 
     t_outlet* binary_data_out;
     t_outlet* string_data_out;
