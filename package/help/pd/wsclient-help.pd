@@ -1,4 +1,4 @@
-#N canvas 870 239 545 490 12;
+#N canvas 146 140 545 490 12;
 #X msg 132 237 1 2 3 4;
 #X text 345 419 see also:;
 #X text 117 49 - websocket client;
@@ -30,6 +30,11 @@
 #X text 12 105 OUTLET_1 text outlet;
 #X text 12 125 OUTLET_2 connected;
 #X restore 455 17 pd META;
+#N canvas 304 241 387 139 peer-verification 0;
+#X obj 36 85 wsclient -noverify;
+#X text 33 26 Per default ssl peer verification is turned on. It can be turned off using -noverify, f 47;
+#X restore 355 206 pd peer-verification;
+#X text 323 206 -->;
 #X connect 0 0 13 0;
 #X connect 9 0 13 0;
 #X connect 10 0 13 0;

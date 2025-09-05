@@ -210,7 +210,7 @@ void wsclient_list(t_ws_client_pd *x, t_symbol *s, int argc, t_atom *argv)
 
 }
 
-void *wsclient_new(t_symbol* s)
+void *wsclient_new(t_symbol* s, int argc, t_atom *argv)
 {
     t_ws_client_pd *x = (t_ws_client_pd *)pd_new(ws_client_pd_class);
 
@@ -222,19 +222,31 @@ void *wsclient_new(t_symbol* s)
 
     x->client = new PdWebsocketClient((t_pd*)x);
 
-    if (s && s != gensym(""))
+
+    for (int i = 0; i < argc; ++i)
     {
-        if (s == gensym("-b"))
+        if (argv[i].a_type == A_SYMBOL)
         {
-            x->client->binary(true);
-        }
-        else if (s == gensym("-t"))
-        {
-            x->client->binary(false);
+            if (argv[i].a_w.w_symbol == gensym("-b"))
+            {
+                x->client->binary(true);
+            }
+            else if (argv[i].a_w.w_symbol == gensym("-t"))
+            {
+                x->client->binary(false);
+            }
+            else if (argv[i].a_w.w_symbol == gensym("-noverify"))
+            {
+                x->client->verifyPeer(false);
+            }
+            else
+            {
+                pd_error(x, "invalid argument: %s", s->s_name);
+            }
         }
         else
         {
-            pd_error(x, "invalid argument: %s", s->s_name);
+            pd_error(x, "invalid argument");
         }
     }
 
@@ -256,7 +268,7 @@ void wsclient_setup(void) {
                                    (t_method)wsclient_free,
                                    sizeof(t_ws_client_pd),
                                    CLASS_DEFAULT,
-                                   A_DEFSYM,
+                                   A_GIMME,
                                    0);
 
     class_addlist(ws_client_pd_class, (t_method)wsclient_list);
