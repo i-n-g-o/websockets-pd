@@ -8,4 +8,4 @@ set(WS_CLIENT_SOURCES
 pd_add_external(${WS_CLIENT} "${WS_CLIENT_SOURCES}")
 
 scaryws_setup_target(${WS_CLIENT})
-target_link_libraries(${WS_CLIENT} scaryws)
+target_link_libraries(${WS_CLIENT} PRIVATE scaryws)
