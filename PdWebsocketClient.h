@@ -1,9 +1,9 @@
 #ifndef PDWEBSOCKETCLIENT_H
 #define PDWEBSOCKETCLIENT_H
 
-#include "WebsocketClient.h"
+#include <m_pd.h>
 
-#include "wsclient.h"
+#include <WebsocketClient.h>
 
 using namespace scaryws;
 

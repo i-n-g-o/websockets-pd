@@ -1,7 +1,6 @@
 #include "PdWebsocketClient.h"
 
-#include <m_pd.h>
-
+#include "wsclient.h"
 
 PdWebsocketClient::PdWebsocketClient(t_pd* x)
     : WebsocketClient()

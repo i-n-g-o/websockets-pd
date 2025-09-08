@@ -1,5 +1,7 @@
 #include "PdWebsocketServer.h"
 
+#include "wsserver.h"
+
 PdWebsocketServer::PdWebsocketServer(t_pd* x)
     : WebsocketServer()
     , m_x(x)
@@ -8,8 +10,8 @@ PdWebsocketServer::PdWebsocketServer(t_pd* x)
 
 // threaded
 void PdWebsocketServer::listening()
-{    
-    pd_queue_mess(&pd_maininstance, m_x, NULL, bindCb);    
+{
+    pd_queue_mess(&pd_maininstance, m_x, NULL, bindCb);
 }
 
 void PdWebsocketServer::closed()

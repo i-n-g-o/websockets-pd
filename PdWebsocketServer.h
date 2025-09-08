@@ -2,9 +2,8 @@
 #define PDWEBSOCKETSERVER_H
 
 #include <m_pd.h>
-#include <WebsocketServer.h>
 
-#include "wsserver.h"
+#include <WebsocketServer.h>
 
 using namespace scaryws;
 
